@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Balti Med Amine - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rubik:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font-sans: 'Rubik', sans-serif;
+      --font-display: 'Orbitron', sans-serif;
+      --bg: #f5f5f5;
+      --text: #111;
+      --accent: #00fff7;
+      --accent-secondary: #ff0066;
+      --glass: rgba(255, 255, 255, 0.2);
+      --border: rgba(0, 0, 0, 0.1);
+      --transition-base: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.dark {
+      --bg: #0f111a;
+      --text: #e0e0e0;
+      --glass: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.6s ease, color 0.6s ease;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Header Styles */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      transition: all var(--transition-base);
+    }
+
+    .header.scrolled {
+      padding: 0.5rem 0;
+      backdrop-filter: blur(16px);
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: translateX(-100%);
+      transition: transform var(--transition-base);
+    }
+
+    .logo:hover::after {
+      transform: translateX(0);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition-base);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .theme-icon {
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      will-change: transform;
+    }
+
+    .theme-toggle-wrapper:hover .theme-icon {
+      transform: scale(1.3) rotate(15deg);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: var(--transition-base);
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 3px;
+      background-color: white;
+      transition: var(--transition-base);
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      background: radial-gradient(ellipse at top, #011f4b, #001b33);
+      color: var(--accent);
+      font-family: var(--font-display);
+      padding: 2rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 247, 0.1) 0%, transparent 70%);
+      animation: pulse 8s infinite alternate;
+    }
+
+    .profile-pic {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 30px var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards 0.2s;
+      transition: all var(--transition-base);
+      z-index: 2;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 0 50px var(--accent);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      text-shadow: 0 0 12px var(--accent);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards 0.4s;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent-secondary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+
+    .hero-title:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--text);
+      text-shadow: 0 0 8px var(--accent);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards 0.6s;
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      background: var(--accent);
+      border-radius: 50%;
+      filter: blur(1px);
+      opacity: 0.7;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+
+    /* Button Styles */
+    .btn {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      border: none;
+      background: var(--accent-secondary);
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 0 15px var(--accent-secondary);
+      transition: all var(--transition-base);
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards 0.8s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      display: inline-block;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--accent-secondary), var(--accent));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px var(--accent-secondary);
+    }
+
+    .btn:hover::before {
+      opacity: 1;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 5rem 1rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      position: relative;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0, 255, 247, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 6px var(--accent);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-secondary);
+      border-radius: 2px;
+    }
+
+    .section-text {
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 800px;
+      margin: auto;
+      color: var(--text);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 255, 247, 0.1) 0%, transparent 100%);
+      z-index: -1;
+    }
+
+    .project-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      transition: color var(--transition-base);
+    }
+
+    .project-card:hover h3 {
+      color: var(--accent-secondary);
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .project-card a {
+      color: var(--accent-secondary);
+      text-decoration: none;
+      position: relative;
+      font-weight: 600;
+    }
+
+    .project-card a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition-base);
+    }
+
+    .project-card a:hover::after {
+      width: 100%;
+    }
+
+    /* Expanded Project Card */
+    .project-card.expanded {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      z-index: 2000;
+      overflow-y: auto;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+      cursor: default;
+    }
+
+    .project-card.expanded::before {
+      background: linear-gradient(135deg, rgba(0, 255, 247, 0.2) 0%, transparent 100%);
+    }
+
+    .project-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .project-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .project-card .project-content {
+      display: none;
+    }
+
+    .project-card.expanded .project-content {
+      display: block;
+      margin-top: 1.5rem;
+    }
+
+    .project-card .close-project {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--accent-secondary);
+      transition: all var(--transition-base);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .project-card.expanded .close-project {
+      display: flex;
+    }
+
+    .project-card .close-project:hover {
+      color: var(--accent);
+      transform: rotate(90deg);
+      background: rgba(255, 0, 102, 0.1);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      display: none;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 500px;
+      margin: 2rem auto 0;
+      position: relative;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+      transform: scale(0.9);
+      transition: all var(--transition-base);
+    }
+
+    .contact-form.active {
+      display: flex;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .contact-form .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--accent-secondary);
+      transition: all var(--transition-base);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .contact-form .close-btn:hover {
+      color: var(--accent);
+      transform: rotate(90deg);
+      background: rgba(255, 0, 102, 0.1);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1rem;
+      resize: vertical;
+      transition: all var(--transition-base);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .contact-form button[type="submit"] {
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: var(--accent);
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% {
+        box-shadow: 0 0 10px var(--accent);
+      }
+      50% {
+        box-shadow: 0 0 25px var(--accent);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-card.expanded {
+        width: 95%;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header .container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav {
+        gap: 1rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">Balti Med Amine</h1>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" id="contactLink">Contact</a>
+        <div class="theme-toggle-wrapper" title="Toggle theme">
+          <span class="theme-icon">🌙</span>
+          <label class="switch">
+            <input type="checkbox" id="themeSlider" />
+            <span class="slider"></span>
+          </label>
+          <span class="theme-icon">☀️</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" class="hero-section">
+    <!-- Floating particles will be added by JS -->
+    <img src="https://scontent.ftun16-1.fna.fbcdn.net/v/t39.30808-6/484444047_1793835044738721_6229909352937119874_n.jpg?stp=c0.83.756.756a_dst-jpg_s565x565_tt6&_nc_cat=100&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=DQ0v8yI3CQgQ7kNvwE2f8YY&_nc_oc=AdkEmyJcQEyGbZ9mzDe06GN40vjIFIZ5PnwX5vrj4pNQfbEg-qB7nDmQMlkbc6aFEHE&_nc_zt=23&_nc_ht=scontent.ftun16-1.fna&_nc_gid=H5vETpEjDmMiGvsfJCSCKA&oh=00_AfUDClLT6nomShhiHBOroEmw3WmBJfwyJk69ZC31g-GLCg&oe=68A52192" alt="Balti Med Amine" class="profile-pic" />
+    <h2 class="hero-title">Hi, I'm <span style="color: var(--accent-secondary)">Balti Med Amine</span></h2>
+    <p class="hero-subtitle">Software Developer & Web Designer</p>
+    <a href="#projects" class="btn">View Projects</a>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-text">
+        Passionate about blending technology and art, I craft sleek user interfaces with cutting-edge design trends like glassmorphism and smooth animations. I thrive in creating immersive digital experiences that captivate and engage users.
+      </p>
+      <p class="section-text" style="margin-top: 1rem;">
+        With expertise in front-end development and UI/UX design, I transform complex problems into elegant solutions that delight users.
+      </p>
+      <a href="#contact" class="btn btn-outline" id="aboutContactBtn" style="margin-top: 2rem;">Get In Touch</a>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3>Portfolio Website</h3>
+          <p>This responsive portfolio showcasing my work and skills with modern animations and effects.</p>
+          <a href="portfolio.html" class="view-project">View Project →</a>
+          <div class="project-content">
+            <h4>Project Details</h4>
+            <p>This portfolio was built with HTML, CSS, and JavaScript, featuring modern design trends like glassmorphism and smooth animations. The site is fully responsive and optimized for performance.</p>
+            <h4>Technologies Used</h4>
+            <ul>
+              <li>HTML5 & CSS3</li>
+              <li>JavaScript (ES6+)</li>
+              <li>CSS Animations</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
+          <span class="close-project">×</span>
+        </article>
+        <article class="project-card">
+          <h3>Local Services Website</h3>
+          <p>Choufli Hall:Complete website for local service provider with booking system.</p>
+          <a href="projects/choufli_hall/home.html" class="view-project">Coming-Soon →</a>
+          <div class="project-content">
+            <h4>Project Details</h4>
+            <p>A comprehensive website for a local service provider, featuring a booking system, service catalog, and customer reviews. The site was designed to be user-friendly and accessible.</p>
+            <h4>Technologies Used</h4>
+            <ul>
+              <li>HTML5 & CSS3</li>
+              <li>JavaScript</li>
+              <li>PHP for backend</li>
+              <li>MySQL database</li>
+            </ul>
+          </div>
+          <span class="close-project">×</span>
+        </article>
+        <article class="project-card">
+          <h3>Coming Soon</h3>
+          <p>Exciting new project in development with cutting-edge technologies.</p>
+          <a href="#" class="view-project">Learn More →</a>
+          <div class="project-content">
+            <h4>Project Details</h4>
+            <p>This upcoming project will showcase the latest web technologies and innovative design patterns. Stay tuned for more details!</p>
+            <h4>Planned Technologies</h4>
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+          <span class="close-project">×</span>
+        </article>
+      </div>
+      <div class="project-overlay"></div>
+      <a href="#contact" class="btn btn-outline" id="projectsContactBtn" style="margin-top: 3rem;">Contact Me About Projects</a>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <button class="btn" id="openContactFormBtn">Open Contact Form</button>
+      <form class="contact-form" id="contactForm">
+        <span class="close-btn" id="closeForm">×</span>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Email Address" required />
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Balti Med Amine. Crafted with <span style="color: var(--accent-secondary)">☕</span> and <span style="color: var(--accent)">code 💻</span>.</p>
+  </footer>
+
+  <script>
+    // Theme toggle with enhanced animation
+    const themeSlider = document.getElementById('themeSlider');
+    const themeIcons = document.querySelectorAll('.theme-icon');
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('dark-mode') === 'true') {
+      document.body.classList.add('dark');
+      themeSlider.checked = true;
+      themeIcons[0].style.transform = 'scale(0)';
+      themeIcons[1].style.transform = 'scale(1)';
+    } else {
+      themeIcons[0].style.transform = 'scale(1)';
+      themeIcons[1].style.transform = 'scale(0)';
+    }
+    
+    themeSlider.addEventListener('change', () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('dark-mode', themeSlider.checked);
+      
+      // Animate icons
+      if (themeSlider.checked) {
+        themeIcons[0].style.transform = 'scale(0) rotate(-90deg)';
+        themeIcons[1].style.transform = 'scale(1) rotate(0)';
+      } else {
+        themeIcons[0].style.transform = 'scale(1) rotate(0)';
+        themeIcons[1].style.transform = 'scale(0) rotate(90deg)';
+      }
+    });
+
+    // Header scroll effect
+    const header = document.querySelector('.header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal animations
+    const revealSections = document.querySelectorAll('.section');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    revealSections.forEach(sec => sectionObserver.observe(sec));
+
+    // Project cards animation with staggered delay
+    const projectCards = document.querySelectorAll('.project-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 150);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    projectCards.forEach(el => observer.observe(el));
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Contact form interactions
+    const contactLink = document.getElementById('contactLink');
+    const aboutContactBtn = document.getElementById('aboutContactBtn');
+    const projectsContactBtn = document.getElementById('projectsContactBtn');
+    const openContactFormBtn = document.getElementById('openContactFormBtn');
+    const contactForm = document.getElementById('contactForm');
+    const closeForm = document.getElementById('closeForm');
+    
+    function openContactForm() {
+      contactForm.classList.add('active');
+      window.scrollTo({
+        top: document.getElementById('contact').offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+    
+    [contactLink, aboutContactBtn, projectsContactBtn, openContactFormBtn].forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openContactForm();
+      });
+    });
+    
+    closeForm.addEventListener('click', (e) => {
+      e.preventDefault();
+      contactForm.classList.remove('active');
+    });
+    
+    // Close form when clicking outside
+    document.addEventListener('click', (e) => {
+      if (contactForm.classList.contains('active') && 
+          !contactForm.contains(e.target) && 
+          e.target !== contactLink && 
+          e.target !== aboutContactBtn && 
+          e.target !== projectsContactBtn && 
+          e.target !== openContactFormBtn) {
+        contactForm.classList.remove('active');
+      }
+    });
+    
+    // Form submission
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Show success animation
+      contactForm.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        contactForm.style.transform = 'scale(1)';
+        contactForm.classList.remove('active');
+        contactForm.reset();
+        
+        // Create confetti effect
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.top = '0';
+        confetti.style.left = '0';
+        confetti.style.width = '100%';
+        confetti.style.height = '100%';
+        confetti.style.pointerEvents = 'none';
+        confetti.style.zIndex = '1000';
+        document.body.appendChild(confetti);
+        
+        // Add confetti particles
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.style.position = 'absolute';
+          particle.style.width = '10px';
+          particle.style.height = '10px';
+          particle.style.background = i % 2 ? 'var(--accent)' : 'var(--accent-secondary)';
+          particle.style.borderRadius = '50%';
+          particle.style.left = Math.random() * 100 + 'vw';
+          particle.style.top = '-10px';
+          particle.style.opacity = '0';
+          confetti.appendChild(particle);
+          
+          // Animate each particle
+          setTimeout(() => {
+            particle.style.transition = `all ${1 + Math.random()}s cubic-bezier(0.1, 0.8, 0.3, 1)`;
+            particle.style.opacity = '1';
+            particle.style.transform = `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 360}deg)`;
+          }, i * 30);
+        }
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+          document.body.removeChild(confetti);
+        }, 2000);
+      }, 300);
+    });
+
+    // Create floating particles in hero section
+    const heroSection = document.querySelector('.hero-section');
+    const colors = ['var(--accent)', 'var(--accent-secondary)', 'rgba(255,255,255,0.8)'];
+    
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random properties
+      const size = Math.random() * 8 + 2;
+      const posX = Math.random() * 100;
+      const posY = Math.random() * 100;
+      const duration = Math.random() * 20 + 10;
+      const delay = Math.random() * 5;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}%`;
+      particle.style.top = `${posY}%`;
+      particle.style.background = color;
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `-${delay}s`;
+      
+      heroSection.appendChild(particle);
+    }
+
+    // Hover effects for buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = 'translateY(-5px)';
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Project card expansion functionality
+    const projectOverlay = document.querySelector('.project-overlay');
+    const viewProjectLinks = document.querySelectorAll('.view-project');
+    const closeProjectButtons = document.querySelectorAll('.close-project');
+
+    function expandProjectCard(card) {
+      card.classList.add('expanded');
+      projectOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function collapseProjectCards() {
+      projectCards.forEach(card => {
+        card.classList.remove('expanded');
+      });
+      projectOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Click on "View Project" link
+    viewProjectLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = e.target.closest('.project-card');
+        expandProjectCard(card);
+      });
+    });
+
+    // Click on project card (except links)
+    projectCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Only expand if clicking directly on the card, not on links or buttons
+        if (e.target === card || e.target.classList.contains('project-card')) {
+          expandProjectCard(card);
+        }
+      });
+    });
+
+    // Close button click
+    closeProjectButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        collapseProjectCards();
+      });
+    });
+
+    // Overlay click
+    projectOverlay.addEventListener('click', () => {
+      collapseProjectCards();
+    });
+
+    // Close with ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        collapseProjectCards();
+      }
+    });
+  </script>
+</body>
+</html>
